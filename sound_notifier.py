@@ -3,13 +3,12 @@ Sound Notification System
 Plays audio notifications when development sessions are completed.
 """
 
+import math
 import os
+import struct
 import subprocess
 import tempfile
-import math
 import wave
-import struct
-from typing import Optional
 
 
 class SoundNotifier:
@@ -66,11 +65,7 @@ class SoundNotifier:
         """Play sound using system audio commands"""
         try:
             # Try different audio players
-            players = [
-                ['paplay', sound_file],
-                ['aplay', sound_file],
-                ['play', sound_file]
-            ]
+            players = [['paplay', sound_file], ['aplay', sound_file], ['play', sound_file]]
 
             for player_cmd in players:
                 try:
@@ -146,7 +141,7 @@ def play_custom_notification(sound_file: str) -> bool:
 
 if __name__ == "__main__":
     import sys
-    
+
     # Test the notification system
     if len(sys.argv) > 1:
         print(f"Playing custom sound file: {sys.argv[1]}")
